@@ -12,14 +12,29 @@ function processData(input) {
     const median = () => {
         let values = newArray;
         values.sort( function(a,b) {return a - b;} );
-        return process.stdout.write(String());
+        let halfValue = Math.ceil(values.length / 2);
+        let newMedian = (Number(values[halfValue]) + Number(values[halfValue - 1]));
+        return process.stdout.write(String(newMedian / 2));
     }
     const mode = () => {
-        return process.stdout.write(String());
+        let mode = {};
+        let max = 0, count = 0;
+
+        newArray.forEach(function(e) {
+            if (mode[e]) { mode[e]++; }
+            else { mode[e] = 1; }
+
+            if (count<mode[e]) {
+                max = e;
+                count = mode[e];
+            }
+        });
+        return process.stdout.write(String(max));
     }
     mean();
     process.stdout.write("\n");
     median();
+    process.stdout.write("\n");
     mode();
     // process.stdout.write(String(array[1].length));
 } 
